@@ -82,7 +82,7 @@ public void draw()
     if(keyCode == DOWN){Deccel=true;}
     if(keyCode == RIGHT){Rright=true;}
     if(keyCode == LEFT){Rleft=true;}
-    if(keyCode == 32){
+    if(keyCode == 81){
       bul.add(new Bullet(ship));
       //System.out.println(ship.getDirection());
      // System.out.println(bul.get(0).getDirection());
