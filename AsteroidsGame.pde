@@ -1,6 +1,7 @@
 Spaceship ship = new Spaceship();
 Star[] stars;
 ArrayList<Asteroid> ast = new ArrayList<Asteroid>();
+ArrayList<Bullet> bul = new ArrayList<Bullet>();
 boolean Accel, Deccel, Rright, Rleft, Shoot;
 
   public void setup() 
@@ -28,8 +29,10 @@ public void draw()
   }
   ship.move();
   ship.show();
-  
-
+  //for(int i=0; i<bul.size();i++){
+  //  bul.get(i).move();
+  //  bul.get(i).show();
+  //}
   //array for asteroids 
   for(int i = 0; i < ast.size(); i++){
     ast.get(i).move();
@@ -43,7 +46,23 @@ public void draw()
     ast.add(new Asteroid());
     ast.add(new Asteroid());
   }
+  for (int i = 0; i<ast.size();i++){
+    for (int j = 0; j < bul.size();j++){
+      if(dist(bul.get(j).getX(), bul.get(j).getY(), ast.get(i).getX(), ast.get(i).getY())<20){
+        ast.remove(i);
+        bul.remove(j);
+        break;
+      }
+    }
+  }
+  for (int i = 0; i< bul.size(); i++){
+   bul.get(i).move();
+   bul.get(i).show();
+  if ((bul.get(i).getX()) > width || (bul.get(i).getX()<0) || (bul.get(i).getY() > height) || (bul.get(i).getX()< 0)){
+    bul.remove(i);
+  }
 
+  }
   //booleans
 
   if(Deccel == true){
@@ -63,6 +82,11 @@ public void draw()
     if(keyCode == DOWN){Deccel=true;}
     if(keyCode == RIGHT){Rright=true;}
     if(keyCode == LEFT){Rleft=true;}
+    if(keyCode == 32){
+      bul.add(new Bullet(ship));
+      //System.out.println(ship.getDirection());
+     // System.out.println(bul.get(0).getDirection());
+    }
     if(keyCode == 72){
       ship.setX(500);
       ship.setY(500);
